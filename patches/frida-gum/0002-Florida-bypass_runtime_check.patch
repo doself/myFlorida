@@ -1,3 +1,12 @@
+From cf32f1b193643eae7c453b287b0bc9d90f3acfbe Mon Sep 17 00:00:00 2001
+From: doself <fallingdown_yeah.net>
+Date: Tue, 5 Nov 2024 12:59:03 +0800
+Subject: [PATCH] bypass_runtime_check
+
+---
+ bindings/gumjs/generate-runtime.py | 4 ++++
+ 1 file changed, 4 insertions(+)
+
 diff --git a/bindings/gumjs/generate-runtime.py b/bindings/gumjs/generate-runtime.py
 index 0b58a0f4..209d441e 100644
 --- a/bindings/gumjs/generate-runtime.py
@@ -13,3 +22,6 @@ index 0b58a0f4..209d441e 100644
  
      runtime_reldir = Path("runtime")
      runtime_srcdir = input_dir / runtime_reldir
+-- 
+2.36.0.windows.1
+
