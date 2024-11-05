@@ -168,8 +168,7 @@ jobs:
           make
           cd ..
         done
-	
-	make core-android-arm
+        make core-android-arm
         python releng/mkdevkit.py frida-gumjs android-arm build/devkits/gumjs/arm
         make core-android-arm64
         python releng/mkdevkit.py frida-gumjs android-arm64 build/devkits/gumjs/arm64
@@ -213,8 +212,8 @@ jobs:
     - name: package build result for Android
       shell: bash
       run: |
-	pushd frida
-        
+        pushd frida
+
         gzip build-android-arm/subprojects/frida-core/server/frida-server
         gzip build-android-arm64/subprojects/frida-core/server/frida-server
         gzip build-android-x86/subprojects/frida-core/server/frida-server
@@ -229,15 +228,14 @@ jobs:
         gzip build-android-arm64/subprojects/frida-core/lib/gadget/frida-gadget.so
         gzip build-android-x86/subprojects/frida-core/lib/gadget/frida-gadget.so
         gzip build-android-x86_64/subprojects/frida-core/lib/gadget/frida-gadget.so
-	
-	tar -Jcvf 'build/devkits/gumjs/frida-gumjs-devkit-android-arm.tar.xz' -C build/devkits/gumjs/arm .
+
+        tar -Jcvf 'build/devkits/gumjs/frida-gumjs-devkit-android-arm.tar.xz' -C build/devkits/gumjs/arm .
         tar -Jcvf 'build/devkits/gumjs/frida-gumjs-devkit-android-arm64.tar.xz' -C build/devkits/gumjs/arm64 .
         tar -Jcvf 'build/devkits/gumjs/frida-gumjs-devkit-android-x86.tar.xz' -C build/devkits/gumjs/x86 .
         tar -Jcvf 'build/devkits/gumjs/frida-gumjs-devkit-android-x86_64.tar.xz' -C build/devkits/gumjs/x86_64 .
         
-	popd
+        popd
         
-
     - name: Upload android arm frida-server for Florida
       uses: actions/upload-release-asset@v1.0.2
       env:
@@ -357,8 +355,8 @@ jobs:
         asset_path: '${{ github.workspace }}/build-android-x86_64/subprojects/frida-core/lib/gadget/frida-gadget.so.gz'
         asset_name: 'florida-gadget-${{ needs.check_version.outputs.FRIDA_VERSION }}-android-x86_64.so.gz'
         asset_content_type: application/octet-stream
-	
-	  - name: Upload android arm frida-gumjs for Florida
+
+    - name: Upload android arm frida-gumjs for Florida
       uses: actions/upload-release-asset@v1.0.2
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
