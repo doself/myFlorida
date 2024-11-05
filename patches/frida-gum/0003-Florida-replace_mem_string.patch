@@ -1,0 +1,28 @@
+From 95b8bfc1970013b8384b6cdf0961e78ba7fb1f8d Mon Sep 17 00:00:00 2001
+From: doself <fallingdown_fly@yeah.net>
+Date: Mon, 1 Jan 2024 15:12:46 +0000
+Subject: [PATCH] replace mem_string
+
+---
+ bindings/gumjs/generate-runtime.py | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/bindings/gumjs/generate-runtime.py b/bindings/gumjs/generate-runtime.py
+index a7bdd0ae..b5c6eab7 100755
+--- a/bindings/gumjs/generate-runtime.py
++++ b/bindings/gumjs/generate-runtime.py
+@@ -62,8 +62,9 @@ def generate_runtime(backends, arch, endian, input_dir, gum_dir, capstone_incdir
+             ])
+             raise EnvironmentError(message)
+ 
+-    js_path = output_dir / "node_modules" / "frida-java-bridge" / "lib" / "android.js"
+-    subprocess.run("sed -i '/Interceptor.attach(prettyMethod.impl, artController.hooks.ArtMethod.prettyMethod);/,/Interceptor.flush();/{d}' %s" % js_path, shell=True)
++    js_dir = output_dir / "node_modules" / "frida-java-bridge" / "lib" 
++    subprocess.run("sed -i '/Interceptor.attach(prettyMethod.impl, artController.hooks.ArtMethod.prettyMethod);/,/Interceptor.flush();/{d}' %s" % (js_dir / "android.js"), shell=True)
++    subprocess.run("sed -i 's/Current thread is not attached to the Java VM; please move this code inside a Java.perform() callback/cUrrent th^ead 1s n0t attAched t0 tHe ja{a v3; p1ease m0ve th1s c0de 1ns1de a JbAb.perf0rm[] ca11back/g ' %s" % (js_dir / "vm.js"), shell=True)
+ 
+     runtime_reldir = Path("runtime")
+     runtime_srcdir = input_dir / runtime_reldir
+-- 
+2.34.1
+
